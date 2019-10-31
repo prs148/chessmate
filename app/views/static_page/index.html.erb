@@ -8,14 +8,15 @@
 <% if alert.present? %>
   <p class="alert alert-danger"><%= alert %></p>
 <% end %>
+
 <ul>
 <% if user_signed_in? %>
-  <li class="user-email">
+  <li>
     Signed in as <%= current_user.email %>
   </li>
 
-  <li class="nav-item">
-    <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-secondary sign-out' %>
+  <li>
+    <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-secondary' %>
   </li>
 <% else %>
   <div class="dropdown">
@@ -23,9 +24,9 @@
       Log in!
     </button>
     <div class="dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-primary login-dropdown' %>
+      <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-primary' %>
       <br />
-      <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary login-dropdown' %>
+      <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary' %>
     </div>
   </div>
 <% end %>
