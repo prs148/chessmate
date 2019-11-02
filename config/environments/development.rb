@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost:3030' }
@@ -61,5 +62,3 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end
-
-
