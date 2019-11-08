@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_03_173150) do
+ActiveRecord::Schema.define(version: 2019_11_07_040950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(version: 2019_11_03_173150) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "white_player_id"
+    t.integer "black_player_id"
+  end
+
+  create_table "pieces", force: :cascade do |t|
+    t.integer "x_position"
+    t.integer "y_position"
+    t.string "piece_type"
+    t.integer "player_id"
+    t.integer "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_pieces_on_game_id"
+    t.index ["player_id"], name: "index_pieces_on_player_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -29,6 +43,10 @@ ActiveRecord::Schema.define(version: 2019_11_03_173150) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at"
+    t.integer "sign_in_count", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
