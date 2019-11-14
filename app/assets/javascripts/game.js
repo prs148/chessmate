@@ -1,4 +1,4 @@
-$(function() {
+$(document).on('turbolinks:load', function() {
 var $boardContainer = document.querySelector('.board-container'); //grabs the div added to the index page -JB
 var $table = document.createElement("table"); 
 
