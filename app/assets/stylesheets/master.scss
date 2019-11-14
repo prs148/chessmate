@@ -3,3 +3,23 @@
 ul {
   list-style-type: none;
 }
+
+.black {
+  background-color: black;
+}
+
+table td {
+  width: 12.5%;
+  padding-bottom: 12.5%; //Neat trick that keeps table cells square and responsive, adjust view size to see it in action!
+}
+
+.board-container {
+  display: inline-block;
+
+}
+table {
+    border: 3px solid;
+    width: 30%;
+    margin-top: 50px;
+    box-shadow: 10px 10px 5px grey;
+}
