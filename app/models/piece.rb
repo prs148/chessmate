@@ -9,6 +9,7 @@ class ChessPiece
     @y = y
     @game = game
   end
+  
   def move(x, y)
     if is_valid_move?(x, y)
       return true
@@ -18,7 +19,6 @@ class ChessPiece
   end
   
   def is_valid_move?(x, y)
-  
   end
 
   def valid_direction?(x, y)
@@ -26,44 +26,12 @@ class ChessPiece
 
   def is_obstructed?(x, y)  
   end
-
-
-
-class Pawn < ChessPiece
-attr_accessor: first_move
-
-  def is_valid_move?(x, y)
-    valid_direction?(x, y) && !is_obstructed?(x, y) 
-  end
-
-  def valid_direction?(x, y)
-    if !@first_move && ((y == 2 || y == 1) && x = 0)
-      @first_move = true
-      return true
-    elsif @first_move && (y == 1 && x == 0)
-      return true 
-    else 
-      return false
-    end
-  end
-
 end
 
 
-class Queen <ChessPiece
-end
-  
-class King < ChessPiece
-end
 
-class Rook <ChessPiec
-end
 
-class Knight < ChessPiece 
-end 
-  
-class Bishop < ChessPiece 
-end
+
 
 
 def is_obstructed? (x,y)
