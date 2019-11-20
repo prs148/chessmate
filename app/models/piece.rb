@@ -3,34 +3,56 @@ class Piece < ApplicationRecord
 
   def is_obstructed? (x,y)
     check_valid_cord?(x,y)
+    return is_vertical_obstructed?(y) if x == self.x_position
+    return is_horizontal_obstructed?(x) if y == self.y_position
+    is_diagonal_obstructed?(x,y)
+  end
 
+  def check_valid_cord?(x,y)
+    x_diff = self.x_position - x
+    y_diff = self.y_position - y
+    if x_diff != 0 && y_diff != 0 && x_diff.abs != y_diff.abs
+      raise "Illegal arguements"
+    end
+  end
+
+  def is_vertical_obstructed? (y)
+    y_inc = inc(y,self.y_position)
+    y += y_inc
+    until y == self.y_position
+      unless game.pieces.where(x_position: self.x_position, y_position: y).empty?
+        return true
+      end
+      y += y_inc
+    end
+    false
+  end
+
+  def is_horizontal_obstructed? (x)
+    x_inc = inc(x,self.x_position)
+    x += x_inc
+    until x == self.x_position
+      unless game.pieces.where(x_position: x, y_position: self.y_position).empty?
+        return true
+      end
+      x += x_inc
+    end
+    false
+  end
+
+  def is_diagonal_obstructed? (x,y) 
     x_inc = inc(x,self.x_position)
     y_inc = inc(y,self.y_position)
     x += x_inc
     y += y_inc
-    byebug
     until x == self.x_position && y == self.y_position
-      unless Piece.where(["x_position = ? and y_position = ? and game_id = ?", x, y, self.id]).empty?
+      unless game.pieces.where(x_position: x, y_position: y).empty?
         return true
       end
       x += x_inc
       y += y_inc
     end
     false
-  end
-
-  def is_vertical_obstructed? (x,y)
-    # x = 1 and self.x_position = 1
-    # y = 5 and self.y_position = 1
-    (self.y_position + 1..y - 1).each do |i|
-      return true if Piece.where(["x_position = ? and y_position = ? and game_id = ?", x, y, self.id])
-    end
-  end
-
-  def is_horizontal_obstructed? (x,y)
-  end
-
-  def is_diagonal_obstructed? (x,y) 
   end
 
   def inc (start,dest)
@@ -43,11 +65,5 @@ class Piece < ApplicationRecord
     end
   end
 
-  def check_valid_cord?(x,y)
-    x_diff = self.x_position - x
-    y_diff = self.y_position - y
-    if x_diff != 0 && y_diff != 0 && x_diff.abs != y_diff.abs
-      raise "Illegal arguements"
-    end
-  end
+  
 end
