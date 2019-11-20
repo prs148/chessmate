@@ -22,3 +22,5 @@ function buildBoard() {
 }
 buildBoard();
 });
+
+console.log($buildboard.getattribute('data-coord')
