@@ -1,4 +1,4 @@
-class Queen > class ChessPiece
+class Queen < Piece
 
 
 end

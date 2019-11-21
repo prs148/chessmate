@@ -1,6 +1,7 @@
-class Pawn < ChessPiece
+class Pawn < Piece
 attr_accessor: first_move
-
+piece_type = pawn
+  
   def is_valid_move?(x, y)
     valid_direction?(x, y) && !is_obstructed?(x, y) 
   end

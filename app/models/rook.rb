@@ -1,3 +1,3 @@
-class Rook > class ChessPiece 
+class Rook < Piece 
 
 end

@@ -1,3 +1,3 @@
-class Bishop > class ChessPiece 
+class Bishop < Piece 
 
 end

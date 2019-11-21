@@ -1,38 +1,8 @@
 class Piece < ApplicationRecord
   belongs_to :game
+  self.inheritance_column = 'piece_type'
 
-
-class ChessPiece
-  attr_accessor: :x, :y, :game
-  def initialize(x, y, game)
-    @x = x
-    @y = y
-    @game = game
-  end
-  
-  def move(x, y)
-    if is_valid_move?(x, y)
-      return true
-    else
-      return false 
-    end
-  end
-  
-  def is_valid_move?(x, y)
-  end
-
-  def valid_direction?(x, y)
-  end
-
-  def is_obstructed?(x, y)  
-  end
-end
-
-
-
-
-
-
+ 
 
 def is_obstructed? (x,y)
   check_valid_cord?(x,y)
