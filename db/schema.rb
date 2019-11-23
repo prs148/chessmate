@@ -52,4 +52,6 @@ ActiveRecord::Schema.define(version: 2019_11_20_063453) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "games", "users", column: "black_player_id"
+  add_foreign_key "games", "users", column: "white_player_id"
 end

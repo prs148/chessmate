@@ -14,6 +14,19 @@
 <br />
 <br />
 
+
+<div class= "text-center">
+  <%= simple_form_for @game do |f| %>
+  <%= f.input :name,  %>
+  <%= f.input :name, :collection => @players %>
+
+  <%= f.input :white_player_id %>
+  <%= f.submit 'Create' , class: 'btn btn-danger'%>
+
+<% end %>
+
+
+</div>  
   <div class = "text-center"> 
     <h1> Activate Games </h1>
 
