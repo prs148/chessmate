@@ -1,6 +1,7 @@
 class Piece < ApplicationRecord
   belongs_to :game
-
+  self.inheritance_column = 'piece_type'
+  
   def is_obstructed? (x,y)
     check_valid_cord?(x,y)
     return is_vertical_obstructed?(y) if x == self.x_position
