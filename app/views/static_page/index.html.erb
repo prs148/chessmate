@@ -34,8 +34,9 @@
 </ul>
 
 
-<div class="board-container d-flex justify-content-center">
-</div>
+<% @games.each do |game| %>
+  <h1> <%= game.name %> </h1>
+<% end %>
 
 
 <br />
@@ -43,5 +44,6 @@
 
 
 <div class="text-center"> <%= link_to 'Games Page', games_path, class: 'btn btn-secondary' %>
+<div class="text-center"> <%= link_to 'Create Game', new_game_path, class: 'btn btn-secondary' %>
 
 </div>
