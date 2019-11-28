@@ -10,7 +10,7 @@ RSpec.describe GamesController, type: :controller do
         game: {
           name: "test game",
           white_player_id: user.id,
-          black_player_id: 5,
+          black_player_id: nil,
           user_id: user.id,
         }
       }
