@@ -1,5 +1,8 @@
 class Pawn < Piece 
 
+attr_accessor: first_move
+
+
 
 def valid_move?(x, y)
   super(x, y)
