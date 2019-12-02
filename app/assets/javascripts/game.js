@@ -3,11 +3,18 @@ $(document).on('turbolinks:load', function() {
 
   function genCoords() {
     var coords = [];
-    for (var x = 0; x < 8; x++) {    
-        for (var y = 0; y < 8; y++) {
-            coords.push({x, y, className: x%2 == y%2 ? 'black':'white'})
+    for (var y = 0; y <= 7; y++) {    
+        for (var x = 0; x < 8; x++) {
+            coords.push(
+              {
+                y, 
+                x, 
+                className: y%2 == x%2 ? 'black':'white'
+              })
         }
+        
     }
+    console.log(coords)
     return coords
   }
 
@@ -15,21 +22,21 @@ $(document).on('turbolinks:load', function() {
     var coords = genCoords();
     return coords.map(function(coord){ 
       let color = '';
-      color = coord.x < 2 ? 'white' : 'black';
-      if (coord.x === 0 || coord.x === 7) {
-        if (coord.y === 0 || coord.y === 7) {
+      color = coord.y < 2 ? 'white' : 'black';
+      if (coord.y === 0 || coord.y === 7) {
+        if (coord.x === 0 || coord.x === 7) {
           coord.piece = `rook-${color}`;
-        } else if (coord.y === 1 || coord.y === 6) {
+        } else if (coord.x === 1 || coord.x === 6) {
           coord.piece = `knight-${color}`;
-        } else if (coord.y === 2 || coord.y === 5) {
+        } else if (coord.x === 2 || coord.x === 5) {
           coord.piece = `bishop-${color}`;
-        } else if (coord.y === 3) {
+        } else if (coord.x === 3) {
           coord.piece = `queen-${color}`;
-        } else if (coord.y === 4) {
+        } else if (coord.x === 4) {
           coord.piece = `king-${color}`
         }
       }
-      if (coord.x === 1 || coord.x === 6) { //All pawns populate a single row on both sides, no y coord needed
+      if (coord.y === 1 || coord.y === 6) { //All pawns populate a single row on both sides, no x coord needed
           coord.piece = `pawn-${color}`;
         }
       return coord;
@@ -45,19 +52,20 @@ $(document).on('turbolinks:load', function() {
 
     var $td = document.createElement('td'); 
     $td.className = coord.className;
-    $td.setAttribute('data-x', coord.x);
     $td.setAttribute('data-y', coord.y);
+    $td.setAttribute('data-x', coord.x);
     $td.setAttribute('piece', coord.piece);
-    $tr.appendChild($td)    
+    // $td.innerHTML= 'cord.piece';
+    $tr.appendChild($td);    
   }
 
-  for (var x = 0; x < 8; x++) { 
+  for (var y = 0; y <= 7; y++) { 
     var $tr = document.createElement('tr');
-    if (x === 0) {
+    if (y === 0) {
       coords.slice(0, 8).forEach(buildTrTd);
       $table.appendChild($tr);
     } else {
-      coords.slice((x * 8) , (x +1) * 8).forEach(buildTrTd)
+      coords.slice((y * 8) , (y +1) * 8).forEach(buildTrTd)
       $table.appendChild($tr);
     }
   }  

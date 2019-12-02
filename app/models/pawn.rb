@@ -1,9 +1,7 @@
 class Pawn < Piece 
 attr_accessor: first_move
   
-  def initilizer(x, y, color)
-    self.coord_x = x
-    self.coord_y = y
+
 
   def is_valid_move?(x, y)
     valid_direction?(x, y) && !is_obstructed?(x, y) 
