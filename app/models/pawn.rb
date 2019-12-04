@@ -1,5 +1,6 @@
 class Pawn < Piece 
 
+
 attr_accessor: first_move
 
 
@@ -17,6 +18,7 @@ def valid_move?(x, y)
     end
   end
 end
+
 
 
 #   def valid_move?(x, y)

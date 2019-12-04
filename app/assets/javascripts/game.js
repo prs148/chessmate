@@ -1,75 +1,90 @@
 $(document).on('turbolinks:load', function() {
-  var $boardContainer = document.querySelector('.board-container'); //grabs the div added to the index page -JB
 
-  function genCoords() {
-    var coords = [];
-    for (var y = 0; y <= 7; y++) {    
-        for (var x = 0; x < 8; x++) {
-            coords.push(
-              {
-                y, 
-                x, 
-                className: y%2 == x%2 ? 'black':'white'
-              })
-        }
-        
-    }
-    console.log(coords)
-    return coords
-  }
+var $boardContainer = document.querySelector('.board-container'); //grabs the div added to the index page -JB
+var $table = document.createElement("table"); 
+var $piecesContainer = document.querySelector('.pieces-container');
 
-  function updateCoords() {
-    var coords = genCoords();
-    return coords.map(function(coord){ 
-      let color = '';
-      color = coord.y < 2 ? 'white' : 'black';
-      if (coord.y === 0 || coord.y === 7) {
-        if (coord.x === 0 || coord.x === 7) {
-          coord.piece = `rook-${color}`;
-        } else if (coord.x === 1 || coord.x === 6) {
-          coord.piece = `knight-${color}`;
-        } else if (coord.x === 2 || coord.x === 5) {
-          coord.piece = `bishop-${color}`;
-        } else if (coord.x === 3) {
-          coord.piece = `queen-${color}`;
-        } else if (coord.x === 4) {
-          coord.piece = `king-${color}`
-        }
-      }
-      if (coord.y === 1 || coord.y === 6) { //All pawns populate a single row on both sides, no x coord needed
-          coord.piece = `pawn-${color}`;
-        }
-      return coord;
-    });
-  }
 
- function buildBoard() {
-  var coords = updateCoords();
-  var $table = document.createElement("table"); 
-  $boardContainer.appendChild($table);
+getID(); 
 
-  var buildTrTd = function(coord){
-
-    var $td = document.createElement('td'); 
-    $td.className = coord.className;
-    $td.setAttribute('data-y', coord.y);
-    $td.setAttribute('data-x', coord.x);
-    $td.setAttribute('piece', coord.piece);
-    // $td.innerHTML= 'cord.piece';
-    $tr.appendChild($td);    
-  }
-
-  for (var y = 0; y <= 7; y++) { 
-    var $tr = document.createElement('tr');
-    if (y === 0) {
-      coords.slice(0, 8).forEach(buildTrTd);
-      $table.appendChild($tr);
-    } else {
-      coords.slice((y * 8) , (y +1) * 8).forEach(buildTrTd)
-      $table.appendChild($tr);
-    }
-  }  
+function getID() {
+  let gameID = location.pathname.split('/')[2];
+  getGamePieces(gameID);
 }
 
-buildBoard();
+function getAsciiFromType(piece) {
+  
+  switch (piece.type_id){
+    case 1:
+      return 'blah';
+    break;
+
+  }
+}
+
+
+function getGamePieces(id) {
+     $.ajax({
+        url: `/get_pieces/${id}`,
+        method: 'get',
+
+     }).then(function (data) {
+       let pieces = data; 
+       console.log(pieces)
+       pieces.forEach(function (piece) {
+        var row = $boardContainer.querySelector(`[data-x="${piece.x_position}"][data-y="${piece.y_position}"]`)
+         // $row.append(JSON.stringifπy(piece));
+         console.log(row)
+         if (row){
+          var span = document.createElement('span')
+          span.append(piece.id)
+          row.append(span)
+         }
+       })
+
+     })
+      
+
+}        
+
+
+function buildBoard() {
+
+
+
+  for (let y = 0; y < 8; y++) {   
+      var $tr = document.createElement('tr');
+      for (let x = 0; x < 8; x++) {
+          var $td = document.createElement('td');
+          $td.setAttribute('data-x', x)
+          $td.setAttribute('data-y', y) //grabs the row iterator (i) and the cell iterator (n) and uses them for the coords! -JB
+          if (x%2 == y%2) {           //every even square is white, odd is black -JB
+              $td.className = "black";
+          } else {
+              $td.className = "white";
+          }
+          $tr.appendChild($td);
+           
+          $td.addEventListener('click', handleGetCoord);
+            
+      }
+      $table.appendChild($tr);
+  }
+  $boardContainer.appendChild($table);
+
+
+  }
+
+buildBoard()
 });
+
+
+
+
+function handleGetCoord(event) {
+     var $td = event.target; 
+     var coordx =  $td.getAttribute('data-x');
+     var coordy = $td.getAttribute('data-y');
+     console.log(coordx, coordy);
+
+}
