@@ -12,6 +12,15 @@ function getID() {
   getGamePieces(gameID);
 }
 
+function getAsciiFromType(piece) {
+  
+  switch (piece.type_id){
+    case 1:
+      return 'blah';
+    break;
+
+  }
+}
 
 
 function getGamePieces(id) {
@@ -20,9 +29,18 @@ function getGamePieces(id) {
         method: 'get',
 
      }).then(function (data) {
-       let $pieces = data; 
-       $piecesContainer.append($pieces);
-       console.log ($pieces);
+       let pieces = data; 
+       console.log(pieces)
+       pieces.forEach(function (piece) {
+        var row = $boardContainer.querySelector(`[data-x="${piece.x_position}"][data-y="${piece.y_position}"]`)
+         // $row.append(JSON.stringifπy(piece));
+         console.log(row)
+         if (row){
+          var span = document.createElement('span')
+          span.append(piece.id)
+          row.append(span)
+         }
+       })
 
      })
       
@@ -34,9 +52,9 @@ function buildBoard() {
 
 
 
-  for (var x = 0; x < 8; x++) {   
+  for (let y = 0; y < 8; y++) {   
       var $tr = document.createElement('tr');
-      for (var y = 0; y < 8; y++) {
+      for (let x = 0; x < 8; x++) {
           var $td = document.createElement('td');
           $td.setAttribute('data-x', x)
           $td.setAttribute('data-y', y) //grabs the row iterator (i) and the cell iterator (n) and uses them for the coords! -JB
