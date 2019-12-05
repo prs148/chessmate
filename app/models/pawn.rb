@@ -1,6 +1,6 @@
 class Pawn < Piece 
 
-attr_accessor: first_move
+attr_accessor :first_move
 
 
 
