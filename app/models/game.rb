@@ -12,7 +12,7 @@ class Game < ApplicationRecord
       Pawn.create(game_id: id, x_position: i, y_position: 6, color: "black", status: true)
     end 
 
-    Rook.create(game_id: id, x_position: 0, y_position: 7, color: "black", status: true) 
+    Rook.create(game_id: id, x_position: 0, y_position: 7, color: "black", status: true, player_id: self.black_player_id) 
     Rook.create(game_id: id, x_position: 7, y_position: 7, color: "black", status: true) 
 
     Knight.create(game_id: id, x_position: 1, y_position: 7, color: "black", status: true) 
@@ -48,16 +48,6 @@ class Game < ApplicationRecord
     pieces.where(x_position: x, y_position: y).take
   end
 
-
-  # def color 
-  #   if black_player_id
-  #     return true 
-
-  #   else 
-  #     return false 
-
-
-  # end
 
 
  

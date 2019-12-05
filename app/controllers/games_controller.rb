@@ -15,12 +15,19 @@ class GamesController < ApplicationController
   end
 
   def get_pieces
-
   end
 
   def show 
     @game = Game.find(params[:id])
-    # render json: @game.pieces
+   
+  end 
+
+  def update
+    @game = Game.find(params[:id])
+    @game.update_attributes(:black_player_id => current_user.id) 
+    @game.pieces.where(color: 'black').update(player_id: @game.black_player_id) 
+    redirect_to game_path(@game)
+
   end 
 
   private

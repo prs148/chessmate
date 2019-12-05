@@ -12,15 +12,6 @@ function getID() {
   getGamePieces(gameID);
 }
 
-function getAsciiFromType(piece) {
-  
-  switch (piece.type_id){
-    case 1:
-      return 'blah';
-    break;
-
-  }
-}
 
 
 function getGamePieces(id) {

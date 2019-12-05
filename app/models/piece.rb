@@ -2,6 +2,7 @@ class Piece < ApplicationRecord
   belongs_to :game
   self.inheritance_column = 'piece_type'
   
+
   def valid_move?(x, y)
     on_board?(x, y) &&
       game.piece_at(x, y)&.color != self.color &&
@@ -77,10 +78,10 @@ class Piece < ApplicationRecord
     end
   end
 
-  def color
-    return :white if player_id == game.white_player_id
-    return :black if player_id == game.black_player_id
-  end
+  # def color #-this was interfering with piece color assignment upon populating game
+  #   return :white if player_id == game.white_player_id
+  #   return :black if player_id == game.black_player_id
+  # end
 
   
 end

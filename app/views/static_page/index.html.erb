@@ -35,7 +35,7 @@
 
 
 <% @games.each do |game| %>
-  <h1> <%=link_to game.name, game_path(game) %> </h1>
+  <h1> <%=link_to game.name, game_path(game), :method=> :put %> </h1>
 <% end %>
 
 
