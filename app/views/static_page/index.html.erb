@@ -34,10 +34,24 @@
 </ul>
 
 
-<% @games.each do |game| %>
-  <h1> <%=link_to game.name, game_path(game), :method=> :put %> </h1>
-<% end %>
+<br />
+<br />
 
+<div class= text-left>
+
+  <h1>Available Games to Join </h1> 
+    <% @games.each do |game| %>
+      <h2> <%=link_to game.name, game_path(game), :method=> :put %> </h2>
+    <% end %>
+</div>
+
+
+<div class= text-left> 
+  <h1> users active games </h1>
+  <% @started.each do |game| %>
+    <h3> <%=link_to game.name, game_path(game) %> </h3>
+   <%end%> 
+</div>
 
 
 

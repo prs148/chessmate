@@ -20,7 +20,7 @@ RSpec.describe Bishop, type: :model do
     it "should move down to the left" do
       bishop = create_piece_for_game(Bishop, 4, 4)
       expect(bishop.valid_move?(3, 3)).to eq(true)
-      expect(bishop.valid_move?(0, 0)).to eq(true)
+      expect(bishop.valid_move?(2, 2)).to eq(true)
     end
 
     it "should move down and to the right" do
