@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function() {
 
+
 var $boardContainer = document.querySelector('.board-container'); //grabs the div added to the index page -JB
 var $table = document.createElement("table"); 
 var $piecesContainer = document.querySelector('.pieces-container');
@@ -60,8 +61,12 @@ function buildBoard() {
             
       }
       $table.appendChild($tr);
+
+
+
   }
   $boardContainer.appendChild($table);
+
 
 
   }
@@ -71,12 +76,4 @@ buildBoard()
 
 
 
-
-function handleGetCoord(event) {
-     var $td = event.target; 
-     var coordx =  $td.getAttribute('data-x');
-     var coordy = $td.getAttribute('data-y');
-     console.log(coordx, coordy);
-
-}
 
