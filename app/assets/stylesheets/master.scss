@@ -22,4 +22,13 @@ table {
     width: 30%;
     margin-top: 50px;
     box-shadow: 10px 10px 5px grey;
+
+    table-layout: fixed;
+}
+.piece {
+  position: absolute;
+}
+
+.hovered {
+  background-color: grey;
 }

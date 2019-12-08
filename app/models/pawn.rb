@@ -1,7 +1,7 @@
 class Pawn < Piece 
 
 
-attr_accessor: first_move
+
 
 
 
