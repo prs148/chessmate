@@ -9,7 +9,7 @@ class Game < ApplicationRecord
     #black pieces 
 
     (0..7).each do |i|
-      Pawn.create(game_id: id, x_position: i, y_position: 6, color: "black", status: true)
+      Pawn.create(game_id: id, x_position: i, y_position: 6, color: "black", status: true, image: pwn_blk.png)
     end 
 
     Rook.create(game_id: id, x_position: 0, y_position: 7, color: "black", status: true) 

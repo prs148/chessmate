@@ -33,16 +33,18 @@ function getGamePieces(id) {
        // console.log(pieces);
        pieces.forEach(function (piece) {
         var row = $boardContainer.querySelector(`[data-x="${piece.x_position}"][data-y="${piece.y_position}"]`);
-         // $row.append(JSON.stringifπy(piece));
-         // console.log(row);
+
+       
          if (row){
+          var image = document.createElement('img');
+          image.setAttribute('src', `./assets/images/pwn_blk.png`); 
           var span = document.createElement('span');
           span.className = 'piece';
           span.setAttribute('draggable', 'true')
           span.setAttribute('ondragstart', 'onDragStart(event);')
           span.setAttribute('id', piece.id);
-
-          span.append(piece.id);
+          span.appendChild(image);
+          // span.append(piece.image);
           row.appendChild(span);
          }
        })

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_30_213825) do
+ActiveRecord::Schema.define(version: 2019_12_09_010105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2019_11_30_213825) do
     t.datetime "updated_at", null: false
     t.boolean "status"
     t.string "color"
+    t.string "image"
     t.index ["game_id"], name: "index_pieces_on_game_id"
     t.index ["player_id"], name: "index_pieces_on_player_id"
   end
