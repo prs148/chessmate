@@ -56,10 +56,12 @@ class Game < ApplicationRecord
     end
   end
 
+
   def opposing_player_id(player_id)
     return white_player_id if black_player_id == player_id
     return black_player_id if white_player_id == player_id
     
     nil
   end
+
 end
