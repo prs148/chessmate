@@ -12,15 +12,7 @@ function getID() {
   getGamePieces(gameID);
 }
 
-function getAsciiFromType(piece) {
-  
-  switch (piece.type_id){
-    case 1:
-      return 'blah';
-    break;
 
-  }
-}
 
 
 function getGamePieces(id) {
@@ -40,6 +32,8 @@ function getGamePieces(id) {
           span.setAttribute('ondragstart', 'onDragStart(event);')
           span.setAttribute('id', piece.id);
           span.innerHTML = `<img src='/${piece.image}/'>`;
+          // span.append(piece.id);
+
           row.appendChild(span);
          }
 
@@ -48,6 +42,7 @@ function getGamePieces(id) {
      })
       
 }        
+
 
 
 
@@ -74,6 +69,7 @@ function buildBoard() {
             
       }
       $table.appendChild($tr);
+    
   }
   $boardContainer.appendChild($table);
 
@@ -93,26 +89,47 @@ function onDragStart(event) {
   
 }
 
-function onDrop(event) {
-  console.log(event);
-  const display = event
-    .dataTransfer
-    .getData('text'); //this passes the id that we grabbed above to the new child element that we are 
-                      //appending to the new box to make sure the correct piece is moved
-  console.log(display);
-  const draggableElement = document.getElementById(display);
-  const dropzone = event.target;
-
-  dropzone.appendChild(draggableElement);
-
-  event
-    .dataTransfer
-    .clearData();
-}
-
 function onDragOver(event) { //here we can set styling to any of the boxes as the piece is dragged over them, such as highlighting
   event.preventDefault();
 }
+
+function onDrop(event) {
+  
+  console.log(event);
+  const display = event
+    .dataTransfer
+    .getData("text/plain"); //this passes the id that we grabbed above to the new child element that we are 
+                      //appending to the new box to make sure the correct piece is moved
+  // console.log(display);
+  const draggableElement = document.getElementById(display);
+  const dropzone = event.target
+
+  dropzone.appendChild(draggableElement);
+
+
+
+
+  var x_position = dropzone.getAttribute('data-x');
+  var y_position = dropzone.getAttribute('data-y');
+  console.log(x_position, y_position, display)
+ 
+
+  $.ajax({
+    url: `/pieces/${display}`,
+    method: 'PUT',
+    data: {
+      x_position: x_position, 
+      y_position: y_position
+    },
+    dataType: 'json'     
+  }).then( function() {
+
+    event.dataTransfer.clearData();
+  });
+    
+}
+
+
 
 function handleGetCoord(event) {
      var $td = event.target; 

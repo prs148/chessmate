@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   root 'static_page#index'
   resources :games 
   resources :get_pieces
+  resources :pieces
   
 end
