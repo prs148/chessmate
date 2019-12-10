@@ -33,26 +33,33 @@ function getGamePieces(id) {
        // console.log(pieces);
        pieces.forEach(function (piece) {
         var row = $boardContainer.querySelector(`[data-x="${piece.x_position}"][data-y="${piece.y_position}"]`);
-
-       
          if (row){
-          var image = document.createElement('img');
-          image.setAttribute('src', `./assets/images/pwn_blk.png`); 
           var span = document.createElement('span');
           span.className = 'piece';
           span.setAttribute('draggable', 'true')
           span.setAttribute('ondragstart', 'onDragStart(event);')
           span.setAttribute('id', piece.id);
-          span.appendChild(image);
-          // span.append(piece.image);
+          
           row.appendChild(span);
          }
+         attachPieceImage(piece);
        })
 
      })
       
 }        
 
+function attachPieceImage(piece) {
+  // console.log(piece.image);
+  var $span = document.getElementById(piece.id);
+  var picture = piece.image.toString();
+  console.log(picture);
+  $span.innerHTML = `<img src='/${picture}/'>`;
+  // var $image = document.createElement('img');
+  // $image.setAttribute('src', `<%= asset_path('pwn_wht.png') %>`);
+  // $image.setAttribute('draggable', 'true');
+  // $span.appendChild($image);
+}
 
 function buildBoard() {
 
@@ -91,8 +98,9 @@ buildBoard();
 });
 
 function onDragStart(event) {
-  event.dataTransfer.setData("text/plain", event.target.id); //this grabs the id attribute that I set for the spans that currently equals piece.id
-
+  console.log(event.target.parentElement);
+  event.dataTransfer.setData("text/plain", event.target.parentElement.id); //this grabs the id attribute that I set for the spans that currently equals piece.id
+  
 }
 
 function onDrop(event) {
