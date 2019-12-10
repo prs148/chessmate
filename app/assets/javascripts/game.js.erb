@@ -39,27 +39,17 @@ function getGamePieces(id) {
           span.setAttribute('draggable', 'true')
           span.setAttribute('ondragstart', 'onDragStart(event);')
           span.setAttribute('id', piece.id);
-          
+          span.innerHTML = `<img src='/${piece.image}/'>`;
           row.appendChild(span);
          }
-         attachPieceImage(piece);
+
        })
 
      })
       
 }        
 
-function attachPieceImage(piece) {
-  // console.log(piece.image);
-  var $span = document.getElementById(piece.id);
-  var picture = piece.image.toString();
-  console.log(picture);
-  $span.innerHTML = `<img src='/${picture}/'>`;
-  // var $image = document.createElement('img');
-  // $image.setAttribute('src', `<%= asset_path('pwn_wht.png') %>`);
-  // $image.setAttribute('draggable', 'true');
-  // $span.appendChild($image);
-}
+
 
 function buildBoard() {
 
