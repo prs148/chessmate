@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   
   def index
     @games = Game.available
-    @started =  current_user.games
+    @started =  Game.where((:white_player_id || :black_player_id) == current_user.id)
   end
 
   def create
