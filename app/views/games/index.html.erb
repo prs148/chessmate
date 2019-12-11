@@ -21,7 +21,7 @@
   <% @games.each do |game| %>
     <div class="row justify-content-between">
       <p class="game-text col-lg-3 col-sm-6"> <%=link_to game.name, game_path(game) %> </p>
-      <%= link_to "Join game", game_path(game), class: 'btn btn-primary d-flex justify-content-center join-btn col-lg-3 col-sm-6' %>
+      <%= link_to "Join game", game_path(game), :method=> :put, class: 'btn btn-primary d-flex justify-content-center join-btn col-lg-3 col-sm-6' %>
       
     </div>
     <hr>
