@@ -1,3 +1,10 @@
+<% if notice.present? %>
+  <p class="alert alert-info mx-auto"><%= notice %></p>
+<% end %>
+<% if alert.present? %>
+  <p class="alert alert-danger mx-auto"><%= alert %></p>
+<% end %>
+
 <div class="hero-image">
   <div class="hero-text">
     <h1>Let's play chess</h1>
@@ -12,11 +19,4 @@
 </footer>
 
 
-
-<% if notice.present? %>
-  <p class="alert alert-info"><%= notice %></p>
-<% end %>
-<% if alert.present? %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
 

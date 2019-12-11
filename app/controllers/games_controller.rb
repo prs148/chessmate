@@ -14,6 +14,18 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
+  # def update
+  #   game = 
+  #   piece = Piece.find(params[:id])
+  #   if piece.valid_move?
+  #     update active record
+  #     render plain great job! 
+  #   else
+  #     return error
+  #   end
+  # end
+
+
   def get_pieces
 
   end
