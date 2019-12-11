@@ -2,7 +2,6 @@ class Game < ApplicationRecord
   scope :available, -> { where(white_player_id: nil).or(where(black_player_id: nil))}
   belongs_to :user
   has_many :pieces
-  after_create :populate_game
 
 
   def populate_game
@@ -49,16 +48,16 @@ class Game < ApplicationRecord
   end
 
 
-  def check?(player)
-    king = pieces.where(piece_type: "King", player_id: player.id).take
-    pieces.where(player_id: opposing_player_id(player.id)).any? do |p|
+  def check?(color)
+    king = pieces.where(piece_type: "King", color: color).take
+    pieces.where(color: opposing_color(color)).any? do |p|
       p.valid_move?(king.x_position, king.y_position)
     end
   end
 
-  def opposing_player_id(player_id)
-    return white_player_id if black_player_id == player_id
-    return black_player_id if white_player_id == player_id
+  def opposing_color(color)
+    return "white" if color == "black"
+    return "black" if color == "white"
     
     nil
   end
