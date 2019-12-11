@@ -1,8 +1,8 @@
 class GamesController < ApplicationController
-
+  before_action :authenticate_user!, only: [:create, :new]
   
   def index
-    @games = Game.available
+    @games = Game.all
   end
 
   def create

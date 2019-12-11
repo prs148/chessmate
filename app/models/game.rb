@@ -43,6 +43,9 @@ class Game < ApplicationRecord
 
   end
 
+  def players
+    white_player_id.present? && black_player_id.present? ? 2 : 1
+  end
 
   def piece_at(x, y)
     pieces.where(x_position: x, y_position: y).take
