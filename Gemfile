@@ -76,3 +76,5 @@ gem 'devise'
 
 gem 'simple_form'
 gem "non-stupid-digest-assets"
+gem "font-awesome-rails"
+gem "font_awesome5_rails"

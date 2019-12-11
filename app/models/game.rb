@@ -43,6 +43,9 @@ class Game < ApplicationRecord
 
   end
 
+  def players
+    white_player_id.present? && black_player_id.present? ? 2 : 1
+  end
 
   def piece_at(x, y)
     pieces.where(x_position: x, y_position: y).take
@@ -55,6 +58,7 @@ class Game < ApplicationRecord
       p.valid_move?(king.x_position, king.y_position)
     end
   end
+
 
   def opposing_player_id(player_id)
     return white_player_id if black_player_id == player_id
