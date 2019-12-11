@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new]
   
   def index
-    @games = Game.all
+    @games = Game.available
   end
 
   def create
@@ -20,6 +20,7 @@ class GamesController < ApplicationController
 
   def show 
     @game = Game.find(params[:id])
+    render :layout => 'empty'
     # render json: @game.pieces
   end 
 

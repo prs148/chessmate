@@ -1,50 +1,17 @@
-
-<nav class="navbar navbar-toggleable-lg navbar-inverse bg-inverse">
-
-
-  <button class="navbar-toggler ml-auto logo-box float-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-
-<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-  <%= link_to root_path do %>
-    <span class="navbar-brand logo-box">Chessmate</span>
-  <% end %>
-    <li class="nav-item nav-link">
-      <%= link_to 'Create Game', new_game_path %>
-    </li>
-  </ul>
-  <ul class="nav navbar-nav float-lg-right">
-  <% if user_signed_in? %>
-        <li class="nav-item text-white user-name">
-          <a>Signed in as <%= current_user.email %></a>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-secondary sign-out' %>
-        </li>
-      <% else %>
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Log in!
-          </button>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-primary login-dropdown top-login' %>
-            <br />
-            <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary login-dropdown' %>
-          </div>
-        </div>
-      <% end %>
-    </ul>
-</div>
-</nav>
-
 <div class="hero-image">
-
-<div class='container'>
-<h1> Hello Welcome to Chessmate </h1>
+  <div class="hero-text">
+    <h1>Let's play chess</h1>
+    <%= link_to games_path, class: 'btn btn-primary' do %>
+      <h4>View open games</h4>
+    <% end %>
+  </div>
 </div>
+
+<footer class="footer">
+  
+</footer>
+
+
 
 <% if notice.present? %>
   <p class="alert alert-info"><%= notice %></p>
@@ -53,22 +20,3 @@
   <p class="alert alert-danger"><%= alert %></p>
 <% end %>
 
-
-
-<div class="container">
-<% @games.each do |game| %>
-  <h1> <%=link_to game.name, game_path(game) %> </h1>
-  <h1><%= game.players %></h1>
-<% end %>
-</div>
-
-
-
-<br />
-<br />
-
-
-
-<div class="text-center"> 
-
-</div>
