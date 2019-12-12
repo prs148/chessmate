@@ -21,6 +21,7 @@ ul {
 table td {
   width: 12.5%;
   padding-bottom: 12.5%; //Neat trick that keeps table cells square and responsive, adjust view size to see it in action!
+  position:relative;
 }
 
 .board-container {
@@ -35,9 +36,9 @@ table {
 
     table-layout: fixed;
 }
-.piece {
-  position: absolute;
-}
+// .piece {
+//   position: relative;
+// }
 
 .hovered {
   background-color: grey;
@@ -112,4 +113,13 @@ table {
   z-index: 23095;
   left: 0;
   right: 0;
+}
+.piece-image {
+position:absolute;
+width: 100%;
+height: 100%;
+}
+.piece-jpg {
+  width: 100%;
+  height: auto;
 }

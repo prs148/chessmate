@@ -13,7 +13,7 @@ function getID() {
 }
 
 
-
+ 
 
 function getGamePieces(id) {
      $.ajax({
@@ -26,15 +26,16 @@ function getGamePieces(id) {
        pieces.forEach(function (piece) {
         var row = $boardContainer.querySelector(`[data-x="${piece.x_position}"][data-y="${piece.y_position}"]`);
          if (row){
-          var span = document.createElement('span');
-          span.className = 'piece';
-          span.setAttribute('draggable', 'true')
-          span.setAttribute('ondragstart', 'onDragStart(event);')
-          span.setAttribute('id', piece.id);
-          span.innerHTML = `<img src='/${piece.image}/'>`;
+          var div = document.createElement('div');
+          div.className = 'piece';
+          div.setAttribute('draggable', 'true')
+          div.setAttribute('ondragstart', 'onDragStart(event);')
+          div.setAttribute('id', piece.id);
+          div.className = "piece-image";
+          div.innerHTML = `<img class="piece-jpg" src='/${piece.image}/'>`;
           // span.append(piece.id);
 
-          row.appendChild(span);
+          row.appendChild(div);
          }
 
        })
@@ -58,6 +59,7 @@ function buildBoard() {
           $td.setAttribute('data-y', y)
           $td.setAttribute('ondragover', 'onDragOver(event);')
           $td.setAttribute('ondrop', 'onDrop(event);') //grabs the row iterator (i) and the cell iterator (n) and uses them for the coords! -JB
+
           if (x%2 == y%2) {           //every even square is white, odd is black -JB
               $td.className = "black square";
           } else {
