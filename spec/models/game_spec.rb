@@ -14,16 +14,16 @@ RSpec.describe Game, type: :model do
   context "check checks" do
     it "should detect check from bishop" do
       king = create_piece_for_game(King, 4, 4)
-      bishop = create_piece_for_game(Bishop, 6, 6, @black_player.id)
-      expect(@game.check?(@white_player)).to eq(true) 
+      bishop = create_piece_for_game(Bishop, 6, 6, "black")
+      expect(@game.check?("white")).to eq(true) 
 
     end
   end 
 
-  def create_piece_for_game(type, xpos, ypos, player_id = @white_player.id)
+  def create_piece_for_game(type, xpos, ypos,color = "white")
     @game.pieces << type.create(x_position: xpos,
                                 y_position: ypos,
-                                player_id: player_id)
+                                color: color)
     @game.pieces.last
   end
   
