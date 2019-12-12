@@ -104,7 +104,7 @@ function onDrop(event) {
   const draggableElement = document.getElementById(display);
   const dropzone = event.target
 
-  dropzone.appendChild(draggableElement);
+  
 
 
 
@@ -122,12 +122,14 @@ function onDrop(event) {
       y_position: y_position
     },
     dataType: 'json'     
-  }).then( function() {
-
+  }).done( function() {
+    dropzone.appendChild(draggableElement);
     event.dataTransfer.clearData();
+  }).fail(function (err, a, b) {
+    alert('invalid move');
   });
-    
 }
+
 
 
 
