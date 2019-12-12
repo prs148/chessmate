@@ -65,5 +65,4 @@ class Game < ApplicationRecord
     
     nil
   end
-
 end
