@@ -49,17 +49,17 @@ RSpec.describe Bishop, type: :model do
 
     it "should be able to take enemy pieces" do
       bishop = create_piece_for_game(Bishop, 4, 4)
-      create_piece_for_game(Rook, 0, 0, @black_player)
+      create_piece_for_game(Rook, 0, 0,"black")
       expect(bishop.valid_move?(0, 0)).to eq(true)
-      create_piece_for_game(Rook, 2, 2, @black_player)
+      create_piece_for_game(Rook, 2, 2,"black")
       expect(bishop.valid_move?(0, 0)).to eq(false)
     end
   end
 
-  def create_piece_for_game(type, xpos, ypos, player = @white_player)
+  def create_piece_for_game(type, xpos, ypos, color = "white")
     @game.pieces << type.create(x_position: xpos,
                                 y_position: ypos,
-                                player_id: player.id)
+                                color: color)
     @game.pieces.last
   end
 end

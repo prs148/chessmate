@@ -32,10 +32,10 @@ RSpec.describe Rook, type: :model do
     end
   end
 
-  def create_piece_for_game(type, xpos, ypos, player_id = @white_player.id)
+  def create_piece_for_game(type, xpos, ypos, color = "white")
     @game.pieces << type.create(x_position: xpos,
                                 y_position: ypos,
-                                player_id: player_id)
+                                color: color)
     @game.pieces.last
   end
 end

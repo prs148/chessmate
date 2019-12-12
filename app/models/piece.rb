@@ -77,10 +77,7 @@ class Piece < ApplicationRecord
     end
   end
 
-  def color
-    return :white if player_id == game.white_player_id
-    return :black if player_id == game.black_player_id
-  end
+  
 
   
 end

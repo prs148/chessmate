@@ -1,19 +1,7 @@
 class Pawn < Piece 
 
 def valid_move?(x, y)
-  # super(x, y)
-  #   if ((y_position == 1 || y_position == 6) && (y - y_position).abs <= 2 && x == 0)
-  #     return true
-  #   elsif ((y - y_position).abs == 1 && x == 0)
-  #     return true 
-  #   else
-  #     return false
-  #   end
-  # end
-
-
-
-  super(x, y) &&
+    super(x, y) &&
       (valid_jump_move?(x, y) ||
         valid_step_move?(x, y) ||
         valid_diagonal_move?(x, y))
@@ -34,5 +22,6 @@ def valid_move?(x, y)
   def dir
     (color == 'white') ? 1 : -1
   end
+end
 end
 
