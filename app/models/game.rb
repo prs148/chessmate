@@ -58,7 +58,6 @@ class Game < ApplicationRecord
     end
   end
 
- call_valid_move
   def opposing_color(color)
     return "white" if color == "black"
     return "black" if color == "white"
