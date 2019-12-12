@@ -37,8 +37,8 @@ class Game < ApplicationRecord
     Bishop.create(game_id: id, x_position: 2, y_position: 0, color: "white", status: true, image: 'bish_wht.png')
     Bishop.create(game_id: id, x_position: 5, y_position: 0, color: "white", status: true, image: 'bish_wht.png')
 
-    King.create(game_id: id, x_position: 3, y_position: 0, color: "white", status: true, image: 'kng_wht.png')
-    Queen.create(game_id: id, x_position: 4, y_position: 0, color: "white", status: true, image: 'qn_wht.png')
+    King.create(game_id: id, x_position: 4, y_position: 0, color: "white", status: true, image: 'kng_wht.png')
+    Queen.create(game_id: id, x_position: 3, y_position: 0, color: "white", status: true, image: 'qn_wht.png')
 
   end
 
