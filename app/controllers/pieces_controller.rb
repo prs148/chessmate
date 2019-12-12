@@ -7,9 +7,13 @@ class PiecesController < ApplicationController
 
 
   def update
-    @piece = Piece.find(params[:id])
-      if @piece.update piece_params 
-        render json: @piece 
+     @piece = Piece.find(params[:id])
+      unless @piece.valid_move?(params[:x_position].to_i,
+                                params[:y_position].to_i)
+        return redirect_to @piece.game
+      end
+      if @piece.update piece_params
+        render json: @piece
       end
   end 
 

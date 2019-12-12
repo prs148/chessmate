@@ -1,4 +1,5 @@
-$(document).on('turbolinks:load', function() {
+
+var initLoad = function() {
 
 var $boardContainer = document.querySelector('.board-container'); //grabs the div added to the index page -JB
 var $table = document.createElement("table"); 
@@ -9,7 +10,9 @@ getID();
 
 function getID() {
   let gameID = location.pathname.split('/')[2];
-  getGamePieces(gameID);
+  if (gameID) {
+    getGamePieces(gameID);
+  }
 }
 
 
@@ -71,7 +74,9 @@ function buildBoard() {
       $table.appendChild($tr);
     
   }
-  $boardContainer.appendChild($table);
+  if ($boardContainer) {
+    $boardContainer.appendChild($table);    
+  }
 
 
   }
@@ -79,12 +84,23 @@ function buildBoard() {
 
 
 buildBoard();
+}
 
+$(document)
+.off('turbolinks:load', initLoad)
+.on('turbolinks:load', initLoad);
 
-});
+var startYPos;
+var startXPos;
+var startPiece; // Lexical Scoping
+// Rails and ruby use block scoping.
+// const and let use block scoping.
 
 function onDragStart(event) {
-  console.log(event.target.parentElement);
+  console.log('onDragStart', event.target.parentElement);
+  startPiece = event.target.parentElement.parentElement;
+  startXPos = startPiece.getAttribute('data-x');
+  startYPos = startPiece.getAttribute('data-y');
   event.dataTransfer.setData("text/plain", event.target.parentElement.id); //this grabs the id attribute that I set for the spans that currently equals piece.id
   
 }
@@ -104,7 +120,6 @@ function onDrop(event) {
   const draggableElement = document.getElementById(display);
   const dropzone = event.target
 
-  dropzone.appendChild(draggableElement);
 
 
 
@@ -122,11 +137,21 @@ function onDrop(event) {
       y_position: y_position
     },
     dataType: 'json'     
-  }).then( function() {
-
+  }).done( function() {
+    
+    dropzone.appendChild(draggableElement);
+    
     event.dataTransfer.clearData();
+
+   
+  }).fail(function (err, a, b) {
+    alert('invalid move');
+
+
+
   });
     
+
 }
 
 
