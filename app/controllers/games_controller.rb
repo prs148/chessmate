@@ -3,6 +3,7 @@ class GamesController < ApplicationController
   
   def index
     @games = Game.available
+    @started =  Game.where((:white_player_id || :black_player_id) == current_user.id)
   end
 
   def create
@@ -15,21 +16,16 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
-  # def update
-  #   game = 
-  #   piece = Piece.find(params[:id])
-  #   if piece.valid_move?
-  #     update active record
-  #     render plain great job! 
-  #   else
-  #     return error
-  #   end
-  # end
 
 
-  def get_pieces
+  def update
+    @game = Game.find(params[:id])
+    @game.update_attributes(:black_player_id => current_user.id) 
+    @game.pieces.where(color: 'black').update(player_id: @game.black_player_id) 
+    redirect_to game_path(@game)
 
-  end
+
+  end 
 
   def show 
     @game = Game.find(params[:id])
