@@ -1,51 +1,22 @@
-
-<div class='container'>
-<h1> Hello Welcome to Chessmate </h1>
-</div>
-
 <% if notice.present? %>
-  <p class="alert alert-info"><%= notice %></p>
+  <p class="alert alert-info mx-auto"><%= notice %></p>
 <% end %>
 <% if alert.present? %>
-  <p class="alert alert-danger"><%= alert %></p>
+  <p class="alert alert-danger mx-auto"><%= alert %></p>
 <% end %>
 
-<ul>
-  <% if user_signed_in? %>
-    <li>
-      Signed in as <%= current_user.email %>
-    </li>
-
-    <li>
-      <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-secondary' %>
-    </li>
-  <% else %>
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Log in!
-      </button>
-      <div class="dropdown-menu dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-primary' %>
-        <br />
-        <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary' %>
-      </div>
-    </div>
-  <% end %>
-</ul>
-
-
-<% @games.each do |game| %>
-  <h1> <%=link_to game.name, game_path(game) %> </h1>
-<% end %>
-
-
-
-
-<br />
-<br />
-
-
-<div class="text-center"> <%= link_to 'Games Page', games_path, class: 'btn btn-secondary' %>
-<div class="text-center"> <%= link_to 'Create Game', new_game_path, class: 'btn btn-secondary' %>
-
+<div class="hero-image">
+  <div class="hero-text">
+    <h1>Let's play chess</h1>
+    <%= link_to games_path, class: 'btn btn-primary' do %>
+      <h4>View open games</h4>
+    <% end %>
+  </div>
 </div>
+
+<footer class="footer">
+  
+</footer>
+
+
+
