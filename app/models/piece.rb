@@ -7,15 +7,25 @@ class Piece < ApplicationRecord
       game.piece_at(x, y)&.color != self.color &&
       !is_obstructed?(x, y)
   end
+ 
+  # def move_to!(x,y)
+  #   if is_obstructed && game.piece(x, y)&.color != self.color
+  #     game.piece(x, y).status = false 
+  # end 
 
-  
 
+  # def move_to!(x, y)
+  #   captured_piece = game.piece_at(x,y)
+  #   captured_piece && captured_piece.color != self.color
+  # end 
+
+   
   def on_board?(x, y)
     x >= 0 && y >= 0 && x < 8 && y < 8
   end
 
 
-  def is_obstructed?(x,y)
+  def is_obstructed?(x,y)f
     return false unless is_valid_cord_for_obstruction?(x,y)
     return is_vertical_obstructed?(y) if x == self.x_position
     return is_horizontal_obstructed?(x) if y == self.y_position
