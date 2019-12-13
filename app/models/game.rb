@@ -20,8 +20,8 @@ class Game < ApplicationRecord
     Bishop.create(game_id: id, x_position: 2, y_position: 7, color: "black", status: true, image: 'bish_blk.png')
     Bishop.create(game_id: id, x_position: 5, y_position: 7, color: "black", status: true, image: 'bish_blk.png')
 
-    King.create(game_id: id, x_position: 3, y_position: 7, color: "black", status: true, image: 'king_blk.png')
-    Queen.create(game_id: id, x_position: 4, y_position: 7, color: "black", status: true, image: 'qn_blk.png')
+    King.create(game_id: id, x_position: 4, y_position: 7, color: "black", status: true, image: 'king_blk.png')
+    Queen.create(game_id: id, x_position: 3, y_position: 7, color: "black", status: true, image: 'qn_blk.png')
 
     #white pieces
     (0..7).each do |i|
@@ -37,8 +37,8 @@ class Game < ApplicationRecord
     Bishop.create(game_id: id, x_position: 2, y_position: 0, color: "white", status: true, image: 'bish_wht.png')
     Bishop.create(game_id: id, x_position: 5, y_position: 0, color: "white", status: true, image: 'bish_wht.png')
 
-    King.create(game_id: id, x_position: 3, y_position: 0, color: "white", status: true, image: 'kng_wht.png')
-    Queen.create(game_id: id, x_position: 4, y_position: 0, color: "white", status: true, image: 'qn_wht.png')
+    King.create(game_id: id, x_position: 4, y_position: 0, color: "white", status: true, image: 'kng_wht.png')
+    Queen.create(game_id: id, x_position: 3, y_position: 0, color: "white", status: true, image: 'qn_wht.png')
 
   end
 
@@ -53,6 +53,8 @@ class Game < ApplicationRecord
 
   def check?(color)
     king = pieces.where(piece_type: "King", color: color).take
+    return false unless king
+    
     pieces.where(color: opposing_color(color)).any? do |p|
       p.valid_move?(king.x_position, king.y_position)
     end
