@@ -5,10 +5,31 @@ class Piece < ApplicationRecord
   def valid_move?(x, y)
     on_board?(x, y) &&
       game.piece_at(x, y)&.color != self.color &&
-      !is_obstructed?(x, y)
+      !is_obstructed?(x, y) &&
+      !would_be_in_check?(x, y)
   end
 
+  def would_be_in_check?(x, y)
+    target = game.piece_at(x, y)
+    return false if target&.piece_type == "King"
+
+    previous_attrs = attributes
+    previous_target_attrs = target&.attributes
+
+    begin 
+      update_attributes(x_position: x, y_position: y)
+      target&.update_attributes(x_position: nil, y_position: nil)
+      return game.check?(color)
+    ensure
+      update_attributes(previous_attrs)
+      target&.update_attributes(previous_target_attrs)
+    end
+
+  end
   
+  # king = pieces.where(piece_type: "King", color: color).take
+  #   pieces.where(color: opposing_color(color)).any? do |p|
+  #     p.valid_move?(king.x_position, king.y_position)
 
   def on_board?(x, y)
     x >= 0 && y >= 0 && x < 8 && y < 8
