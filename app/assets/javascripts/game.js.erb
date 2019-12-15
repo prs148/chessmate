@@ -125,7 +125,7 @@ function onDrop(event) {
   }).done( function() {
     dropzone.appendChild(draggableElement);
     event.dataTransfer.clearData();
-    initload();
+   
   }).fail(function (err, a, b) {
     alert('invalid move');
   });
