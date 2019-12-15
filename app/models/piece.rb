@@ -9,6 +9,7 @@ class Piece < ApplicationRecord
       !would_be_in_check?(x, y)
   end
 
+
   def would_be_in_check?(x, y)
     target = game.piece_at(x, y)
     return false if target&.piece_type == "King"
@@ -30,6 +31,7 @@ class Piece < ApplicationRecord
   # king = pieces.where(piece_type: "King", color: color).take
   #   pieces.where(color: opposing_color(color)).any? do |p|
   #     p.valid_move?(king.x_position, king.y_position)
+
 
   def on_board?(x, y)
     x >= 0 && y >= 0 && x < 8 && y < 8
