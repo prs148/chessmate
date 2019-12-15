@@ -63,9 +63,11 @@
            if (row){
             var div = document.createElement('div');
             div.className = 'piece';
-            div.setAttribute('draggable', 'true')
-            div.setAttribute('ondragstart', 'onDragStart(event);')
+            div.setAttribute('draggable', 'true');
+            div.setAttribute('ondragstart', 'onDragStart(event);');
             div.setAttribute('id', piece.id);
+            div.setAttribute('x', piece.x_position);
+            div.setAttribute('y', piece.y_position);
             div.className = "piece-image";
             div.innerHTML = `<img class="piece-jpg" src='/${piece.image}/'>`;
             // span.append(piece.id);
@@ -111,24 +113,28 @@ function onDrop(event) {
 
   var x_position = dropzone.getAttribute('data-x');
   var y_position = dropzone.getAttribute('data-y');
+  
+
+
   console.log(x_position, y_position, display)
- 
+  
 
   $.ajax({
     url: `/pieces/${display}`,
     method: 'PUT',
     data: {
       x_position: x_position, 
-      y_position: y_position
+      y_position: y_position, 
+    
     },
     dataType: 'json'     
   }).done( function() {
     dropzone.appendChild(draggableElement);
     event.dataTransfer.clearData();
-   
-  }).fail(function (err, a, b) {
-    alert('invalid move');
-  });
+   })
+  // }).fail(function (err, a, b) {
+  //   alert('invalid move');
+  // });
 }
 
 
