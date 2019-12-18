@@ -1,4 +1,4 @@
-  
+
 
 let playerTurn;
   var initLoad =  function() {
@@ -124,6 +124,13 @@ function onDrop(event) {
 
   var x_position = dropzone.getAttribute('data-x');
   var y_position = dropzone.getAttribute('data-y');
+   var y_drop = dropzone.parentElement.getAttribute('y');
+  if (x_position == null) {
+    x_position = x_drop;
+  }
+  if (y_position == null) {
+    y_position = y_drop;
+  }
     
   
   console.log(x_position, y_position, display)
@@ -145,6 +152,7 @@ function onDrop(event) {
     
     dropzone.appendChild(draggableElement);
     event.dataTransfer.clearData();
+    location.reload();
    })
   // }).fail(function (err, a, b) {
   //   alert('invalid move');
