@@ -3,12 +3,17 @@
    <body>
     <h1 class= "text-center"> <%= @game.name %> </h1>
     <br /> 
+    <br />
+     <div class = "player-turn text-center">
+        <h5> Player Move: <%= @game.player_turn %><h5>
+    </div>
 
     <div class="board-container d-flex justify-content-center"></div>
 
 
     <div class= "pieces-container"> </div>
 
+   
   </body>
 
   

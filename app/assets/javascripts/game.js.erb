@@ -1,12 +1,12 @@
   
 
-
+let playerTurn;
   var initLoad =  function() {
 
   let $boardContainer = document.querySelector('.board-container'); //grabs the div added to the index page -JB
   let $table = document.createElement("table"); 
   let $piecesContainer = document.querySelector('.pieces-container');
- 
+  
 
   function buildBoard() {
 
@@ -56,7 +56,8 @@
           method: 'get',
 
        }).then(function (data) {
-         let pieces = data; 
+         let pieces = data.pieces;
+         playerTurn = data.player_turn;
          // console.log(pieces);
          pieces.forEach(function (piece) {
           var row = $boardContainer.querySelector(`[data-x="${piece.x_position}"][data-y="${piece.y_position}"]`);
@@ -68,6 +69,7 @@
             div.setAttribute('id', piece.id);
             div.setAttribute('x', piece.x_position);
             div.setAttribute('y', piece.y_position);
+            div.setAttribute('data-piece_color', piece.color);
             div.className = "piece-image";
             div.innerHTML = `<img class="piece-jpg" src='/${piece.image}/'>`;
             // span.append(piece.id);
@@ -90,10 +92,19 @@
  .on('turbolinks:load', initLoad);
 
 
-function onDragStart(event) {
-  console.log(event.target.parentElement);
-  event.dataTransfer.setData("text/plain", event.target.parentElement.id); //this grabs the id attribute that I set for the spans that currently equals piece.id
+
+
   
+
+function onDragStart(event) {
+  var target = event.target.parentElement;
+  if (target.dataset.piece_color !== playerTurn) {
+    alert("You cannot make a move!");
+    return;
+  }
+
+
+  event.dataTransfer.setData("text/plain", event.target.parentElement.id); //this grabs the id attribute that I set for the spans that currently equals piece.id
 }
 
 function onDragOver(event) { //here we can set styling to any of the boxes as the piece is dragged over them, such as highlighting
@@ -113,9 +124,8 @@ function onDrop(event) {
 
   var x_position = dropzone.getAttribute('data-x');
   var y_position = dropzone.getAttribute('data-y');
+    
   
-
-
   console.log(x_position, y_position, display)
   
 
@@ -128,7 +138,11 @@ function onDrop(event) {
     
     },
     dataType: 'json'     
-  }).done( function() {
+  }).done( function(data) {
+    // console.log('put data', data);
+    playerTurn = data.player_turn;
+    
+    
     dropzone.appendChild(draggableElement);
     event.dataTransfer.clearData();
    })

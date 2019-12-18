@@ -3,8 +3,16 @@ class Game < ApplicationRecord
   belongs_to :user
   has_many :pieces
 
+  def flip_player_turn
+    if self.player_turn == 'white'
+      self.update(:player_turn => 'black')
+    else
+      self.update(:player_turn => 'white')
+    end
+  end
 
   def populate_game
+    self.update(:player_turn => 'white')
     #black pieces 
 
     (0..7).each do |i|
@@ -67,4 +75,15 @@ class Game < ApplicationRecord
     
     nil
   end
+
+
+
+
+ 
 end
+
+
+
+
+
+
