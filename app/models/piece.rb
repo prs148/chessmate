@@ -33,6 +33,9 @@ class Piece < ApplicationRecord
   #     p.valid_move?(king.x_position, king.y_position)
 
 
+
+
+
   def on_board?(x, y)
     x >= 0 && y >= 0 && x < 8 && y < 8
   end
@@ -46,6 +49,10 @@ class Piece < ApplicationRecord
   end
 
   def is_valid_cord_for_obstruction?(x,y)
+    if (x == nil or y == nil or self.x_position == nil or self.y_position == nil)
+      self.errors.add(:missing_coord_obstruction, "Missing either x #{x} or #{y}")
+      return false
+    end
     x_diff = self.x_position - x
     y_diff = self.y_position - y
     return x_diff == 0 || y_diff == 0 || x_diff.abs == y_diff.abs    
