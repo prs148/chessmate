@@ -7,7 +7,10 @@ class PiecesController < ApplicationController
 
 
   def update
+    x = params[:x_position].to_i
+    y = params[:y_position].to_i
     @piece = Piece.find(params[:id])
+
     game_id = @piece.game_id
     game = Game.find(game_id)
     unless game.player_turn == @piece.color
@@ -21,6 +24,13 @@ class PiecesController < ApplicationController
         render json: {:piece => @piece, :player_turn => game.player_turn} 
      
      else        
+
+#     if @piece.valid_move?(x, y) 
+#       @piece.game.piece_at(x, y)&.remove!
+#       @piece.update piece_params 
+#       render json: @piece 
+#     else        
+
       return redirect_to @piece.game
     end
           
