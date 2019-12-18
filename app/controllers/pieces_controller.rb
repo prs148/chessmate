@@ -18,18 +18,15 @@ class PiecesController < ApplicationController
       return
     end
 
-    if @piece.valid_move?(params[:x_position].to_i,params[:y_position].to_i) 
+    if @piece.valid_move?(x, y)
+        @piece.game.piece_at(x, y)&.remove!
         @piece.update piece_params 
         game.flip_player_turn
+
+
         render json: {:piece => @piece, :player_turn => game.player_turn} 
      
      else        
-
-#     if @piece.valid_move?(x, y) 
-#       @piece.game.piece_at(x, y)&.remove!
-#       @piece.update piece_params 
-#       render json: @piece 
-#     else        
 
       return redirect_to @piece.game
     end
