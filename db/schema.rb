@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_09_010105) do
+ActiveRecord::Schema.define(version: 2019_12_18_180351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2019_12_09_010105) do
     t.integer "white_player_id"
     t.integer "black_player_id"
     t.integer "user_id"
+    t.string "player_turn", default: "white"
   end
 
   create_table "pieces", force: :cascade do |t|

@@ -10,6 +10,22 @@ class Piece < ApplicationRecord
   end
 
 
+
+
+
+
+ 
+  # def last_piece 
+  #   last_piece = []
+  #   last_piece << game.piece.sort_by { |piece| piece.last_update}
+  #   if game.piece.first.player_id = white_player_id      
+  #     game.player_turn = false
+  #   elsif game.piece.first.player_id = black_player_id 
+  #     game.player_turn = true 
+
+  #   end
+  # end
+
   def would_be_in_check?(x, y)
     target = game.piece_at(x, y)
     return false if target&.piece_type == "King"

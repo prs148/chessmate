@@ -9,7 +9,7 @@ class GetPiecesController < ApplicationController
 
   def show 
     @game = Game.find(params[:id])
-    render json: @game.pieces
+    render json: {:pieces => @game.pieces, :player_turn => @game.player_turn}
     
   end 
 end
