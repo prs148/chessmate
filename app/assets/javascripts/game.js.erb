@@ -124,7 +124,8 @@ function onDrop(event) {
 
   var x_position = dropzone.getAttribute('data-x');
   var y_position = dropzone.getAttribute('data-y');
-   var y_drop = dropzone.parentElement.getAttribute('y');
+  var x_drop = dropzone.parentElement.getAttribute('x');
+  var y_drop = dropzone.parentElement.getAttribute('y');
   if (x_position == null) {
     x_position = x_drop;
   }
