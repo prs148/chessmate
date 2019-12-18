@@ -46,7 +46,6 @@ RSpec.describe Piece, type: :model do
   end
 
   it "pinned pieces should be able take enemy king" do
-    game = build(:game)
     create_piece_for_game(King,0,0)
     piece = create_piece_for_game(Rook,0,1)
     create_piece_for_game(Rook,0,2,color = "black")
@@ -55,12 +54,20 @@ RSpec.describe Piece, type: :model do
   end
 
   it "pinned pieces should not be able to reveal check" do
-    game = build(:game)
     create_piece_for_game(King,0,0)
     piece = create_piece_for_game(Rook,0,1)
     create_piece_for_game(Rook,0,2,color = "black")
     expect(piece.valid_move?(2,1)).to eq false
   end
+
+  it "should be able to take enemy pieces" do
+    create_piece_for_game(King, 5, 7, "black")
+    create_piece_for_game(King, 7, 5)
+    piece = create_piece_for_game(Rook, 0, 1)
+    create_piece_for_game(Rook, 0, 2, color = "black")
+    expect(piece.valid_move?(0, 2)).to eq true
+  end
+
 
 
   def create_generic_piece_for_game (game,x_position,y_position)

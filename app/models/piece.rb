@@ -27,14 +27,22 @@ class Piece < ApplicationRecord
     end
 
   end
+
+
+  def at?(x, y)
+    x_position == x && y_position == y
+  end
   
   # king = pieces.where(piece_type: "King", color: color).take
   #   pieces.where(color: opposing_color(color)).any? do |p|
   #     p.valid_move?(king.x_position, king.y_position)
 
+  def remove!
+    update_attributes(x_position: nil, y_position: nil)
+  end
 
-  def on_board?(x, y)
-    x >= 0 && y >= 0 && x < 8 && y < 8
+  def on_board?(x = x_position, y = y_position)
+    x && y && x >= 0 && y >= 0 && x < 8 && y < 8
   end
 
 

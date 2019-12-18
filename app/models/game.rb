@@ -53,11 +53,15 @@ class Game < ApplicationRecord
 
   def check?(color)
     king = pieces.where(piece_type: "King", color: color).take
-    return false unless king
+    return false if king.nil? || !king.on_board?
     
-    pieces.where(color: opposing_color(color)).any? do |p|
+    pieces_for(opposing_color(color)).any? do |p|
       p.valid_move?(king.x_position, king.y_position)
     end
+  end
+
+  def pieces_for(color)
+    pieces.select { |piece| piece.color == color && piece.on_board? }
   end
 
   def opposing_color(color)
