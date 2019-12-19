@@ -149,7 +149,8 @@ function onDrop(event) {
   }).done( function(data) {
     // console.log('put data', data);
     playerTurn = data.player_turn;
-    
+    let $turnDiv = document.querySelector('.player-turn');
+    $turnDiv.innerHTML= `<h1>Player Turn ${playerTurn}</h1>`;
     
     dropzone.appendChild(draggableElement);
     event.dataTransfer.clearData();
