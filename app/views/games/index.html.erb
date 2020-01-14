@@ -1,4 +1,5 @@
 
+<% if(current_user.present?) %>
 <h1 class="text-center">User Joined Games</h1>
 <div class="games-container container">
   <% @started.each do |game| %>
@@ -8,7 +9,7 @@
     <hr>
   <% end %>
 </div>
-
+<% end %>
 
 
 
@@ -27,5 +28,6 @@
     <hr>
   <% end %>
 </div>
+
 
 

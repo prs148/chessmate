@@ -1,9 +1,11 @@
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :new]
+  before_action :authenticate_user!, only: [:create, :new, :update]
   
   def index
     @games = Game.available
-    @started =  Game.where((:white_player_id || :black_player_id) == current_user.id)
+    if(current_user.present?) 
+      @started =  Game.where((:white_player_id || :black_player_id) == current_user.id)
+    end
   end
 
   def create
@@ -28,7 +30,11 @@ class GamesController < ApplicationController
   end 
 
   def show 
-    @game = Game.find(params[:id])
+    if(current_user.present?)
+      @game = Game.find(params[:id])
+    else
+      redirect_to new_user_session_path
+    end
     render :layout => 'empty'
     # render json: @game.pieces
   end 
