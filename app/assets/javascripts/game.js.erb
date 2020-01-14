@@ -1,6 +1,6 @@
 
 
-let playerTurn;
+let playerTurn = null;
   var initLoad =  function() {
 
   let $boardContainer = document.querySelector('.board-container'); //grabs the div added to the index page -JB
@@ -138,6 +138,7 @@ function onDrop(event) {
   
 
   $.ajax({
+
     url: `/pieces/${display}`,
     method: 'PUT',
     data: {
@@ -148,8 +149,9 @@ function onDrop(event) {
     dataType: 'json'     
   }).done( function(data) {
     // console.log('put data', data);
-    playerTurn = data.player_turn;
-    
+    // playerTurn = data.player_turn;
+    // let $turnDiv = document.querySelector('.player-turn');
+    // $turnDiv.innerHTML= `<h1>Player Turn ${playerTurn}</h1>`;
     
     dropzone.appendChild(draggableElement);
     event.dataTransfer.clearData();
